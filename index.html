@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Sports IP & Ethics 2D Learning Quest</title>
     <!-- Tailwind CSS for UI Layout -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -12,7 +12,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap');
         body { font-family: 'Kanit', sans-serif; background-color: #0f172a; color: #f8fafc; }
         .pixel-corners { image-rendering: pixelated; }
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; height: 4px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: #1e293b; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 4px; }
         
@@ -26,39 +26,39 @@
         }
     </style>
 </head>
-<body class="h-screen flex flex-col justify-between overflow-hidden bg-slate-900 select-none">
+<body class="min-h-screen flex flex-col justify-between bg-slate-900 select-none overflow-x-hidden">
 
     <!-- Audio Elements -->
     <audio id="bgmMap" src="img/3.mp3" loop></audio>
     <audio id="sfxApplause" src="img/2.mp3"></audio>
-    <audio id="bgmVictory" src="img/cong.mp3" ></audio>
+    <audio id="bgmVictory" src="img/cong.mp3" loop></audio>
 
     <!-- Top Navigation Header -->
-    <header class="bg-slate-800/90 border-b border-slate-700 px-6 py-3 flex justify-between items-center z-10 shadow-lg">
-        <div class="flex items-center space-x-3">
-            <img src="img/icon_trophy.png" alt="Trophy" class="w-10 h-10 object-contain rounded-lg shadow-sm border border-amber-500/30">
+    <header class="bg-slate-800/95 border-b border-slate-700 px-4 sm:px-6 py-2.5 sm:py-3 flex justify-between items-center z-10 shadow-lg sticky top-0">
+        <div class="flex items-center space-x-2 sm:space-x-3">
+            <img src="img/icon_trophy.png" alt="Trophy" class="w-8 h-8 sm:w-10 sm:h-10 object-contain rounded-lg shadow-sm border border-amber-500/30">
             <div>
-                <h1 class="text-lg font-bold text-amber-400 leading-tight">Sports IP & Ethics Quest</h1>
-                <p class="text-xs text-slate-400">บทที่ 8 ทรัพย์สินทางปัญญาและจริยธรรมของนวัตกรรมทางพลศึกษาและกีฬา</p>
+                <h1 class="text-sm sm:text-lg font-bold text-amber-400 leading-tight">Sports IP & Ethics Quest</h1>
+                <p class="text-[10px] sm:text-xs text-slate-400 line-clamp-1">บทที่ 8 ทรัพย์สินทางปัญญาและจริยธรรมทางการกีฬา</p>
             </div>
         </div>
         
         <!-- Player Stats Bar & Sound Control -->
-        <div class="flex items-center space-x-4">
-            <button onclick="toggleAudio()" id="audioBtn" class="bg-slate-700 hover:bg-slate-600 text-cyan-400 p-2.5 rounded-xl border border-slate-600 transition">
-                <i class="fa-solid fa-volume-high text-base"></i>
+        <div class="flex items-center space-x-2 sm:space-x-4">
+            <button onclick="toggleAudio()" id="audioBtn" class="bg-slate-700 active:bg-slate-600 text-cyan-400 p-2 sm:p-2.5 rounded-xl border border-slate-600 transition">
+                <i class="fa-solid fa-volume-high text-xs sm:text-base"></i>
             </button>
 
-            <div id="statsBar" class="hidden flex items-center space-x-6 bg-slate-900/80 px-4 py-2 rounded-xl border border-slate-700">
-                <div class="flex items-center space-x-2">
-                    <img id="hudAvatar" src="img/char_alex.png" class="w-8 h-8 rounded-full border border-cyan-400 object-cover">
-                    <span id="hudName" class="font-semibold text-slate-200 text-sm">ผู้เล่น</span>
+            <div id="statsBar" class="hidden flex items-center space-x-3 sm:space-x-6 bg-slate-900/90 px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl border border-slate-700">
+                <div class="flex items-center space-x-1.5 sm:space-x-2">
+                    <img id="hudAvatar" src="img/char_alex.png" class="w-6 h-6 sm:w-8 sm:h-8 rounded-full border border-cyan-400 object-cover">
+                    <span id="hudName" class="font-semibold text-slate-200 text-xs sm:text-sm truncate max-w-[60px] sm:max-w-none">ผู้เล่น</span>
                 </div>
-                <div class="flex items-center space-x-1 text-amber-400 font-bold text-sm">
-                    <img src="img/icon_star.png" class="w-5 h-5 object-contain">
-                    <span id="hudStars">0 / 18</span>
+                <div class="flex items-center space-x-1 text-amber-400 font-bold text-xs sm:text-sm">
+                    <img src="img/icon_star.png" class="w-4 h-4 sm:w-5 sm:h-5 object-contain">
+                    <span id="hudStars">0/18</span>
                 </div>
-                <div class="flex items-center space-x-1 text-emerald-400 font-bold text-sm">
+                <div class="flex items-center space-x-1 text-emerald-400 font-bold text-xs sm:text-sm">
                     <i class="fa-solid fa-trophy"></i>
                     <span id="hudScore">0 XP</span>
                 </div>
@@ -67,138 +67,145 @@
     </header>
 
     <!-- Main Game Container -->
-    <main class="flex-1 relative overflow-hidden flex items-center justify-center p-4">
+    <main class="flex-1 relative overflow-y-auto flex items-center justify-center p-2 sm:p-4">
 
         <!-- SCREEN 1: Character Selection Screen -->
-        <div id="charSelectScreen" class="w-full max-w-4xl bg-slate-800/95 border border-slate-700 rounded-2xl p-6 shadow-2xl flex flex-col items-center z-20">
-            <h2 class="text-2xl font-bold text-cyan-400 mb-2">เลือกตัวละครเพื่อเริ่มการเดินทาง</h2>
-            <p class="text-slate-400 text-sm mb-6 text-center">เลือกตัวละครและป้อนชื่อเพื่อเริ่มต้นทำภารกิจเรียนรู้ 2D World Map</p>
+        <div id="charSelectScreen" class="w-full max-w-4xl bg-slate-800/95 border border-slate-700 rounded-2xl p-4 sm:p-6 shadow-2xl flex flex-col items-center my-auto z-20">
+            <h2 class="text-xl sm:text-2xl font-bold text-cyan-400 mb-1 sm:mb-2 text-center">เลือกตัวละครเพื่อเริ่มการเดินทาง</h2>
+            <p class="text-slate-400 text-xs sm:text-sm mb-4 sm:mb-6 text-center">เลือกตัวละครและป้อนชื่อเพื่อเริ่มต้นทำภารกิจเรียนรู้ 2D World Map</p>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mb-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-6 w-full mb-4 sm:mb-6 max-h-[50vh] overflow-y-auto custom-scrollbar p-1">
                 <!-- Alex -->
-                <div onclick="selectCharacter('Alex', 'img/char_alex.png')" class="char-card bg-slate-900/60 border-2 border-slate-700 hover:border-cyan-400 rounded-xl p-4 flex flex-col items-center cursor-pointer transition transform hover:-translate-y-1">
-                    <img src="img/char_alex.png" class="w-36 h-36 object-contain rounded-lg mb-3 bg-slate-800/50">
-                    <h3 class="font-bold text-slate-100">Alex</h3>
-                    <p class="text-xs text-slate-400 text-center mt-1">นักสำรวจสายเทควิเคราะห์นวัตกรรมกีฬา</p>
+                <div onclick="selectCharacter('Alex', 'img/char_alex.png')" class="char-card bg-slate-900/60 border-2 border-slate-700 active:border-cyan-400 hover:border-cyan-400 rounded-xl p-3 sm:p-4 flex flex-row md:flex-col items-center cursor-pointer transition">
+                    <img src="img/char_alex.png" class="w-16 h-16 sm:w-36 sm:h-36 object-contain rounded-lg mr-3 md:mr-0 md:mb-3 bg-slate-800/50 flex-shrink-0">
+                    <div class="text-left md:text-center">
+                        <h3 class="font-bold text-slate-100 text-sm sm:text-base">Alex</h3>
+                        <p class="text-[11px] sm:text-xs text-slate-400 mt-0.5 sm:mt-1">นักสำรวจสายเทควิเคราะห์นวัตกรรมกีฬา</p>
+                    </div>
                 </div>
                 <!-- Maya -->
-                <div onclick="selectCharacter('Maya', 'img/char_maya.png')" class="char-card bg-slate-900/60 border-2 border-slate-700 hover:border-cyan-400 rounded-xl p-4 flex flex-col items-center cursor-pointer transition transform hover:-translate-y-1">
-                    <img src="img/char_maya.png" class="w-36 h-36 object-contain rounded-lg mb-3 bg-slate-800/50">
-                    <h3 class="font-bold text-slate-100">Maya</h3>
-                    <p class="text-xs text-slate-400 text-center mt-1">นักวิทยาศาสตร์การกีฬา ผู้เชี่ยวชาญกฎหมาย IP</p>
+                <div onclick="selectCharacter('Maya', 'img/char_maya.png')" class="char-card bg-slate-900/60 border-2 border-slate-700 active:border-cyan-400 hover:border-cyan-400 rounded-xl p-3 sm:p-4 flex flex-row md:flex-col items-center cursor-pointer transition">
+                    <img src="img/char_maya.png" class="w-16 h-16 sm:w-36 sm:h-36 object-contain rounded-lg mr-3 md:mr-0 md:mb-3 bg-slate-800/50 flex-shrink-0">
+                    <div class="text-left md:text-center">
+                        <h3 class="font-bold text-slate-100 text-sm sm:text-base">Maya</h3>
+                        <p class="text-[11px] sm:text-xs text-slate-400 mt-0.5 sm:mt-1">นักวิทยาศาสตร์การกีฬา ผู้เชี่ยวชาญ IP</p>
+                    </div>
                 </div>
                 <!-- Sam -->
-                <div onclick="selectCharacter('Sam', 'img/char_sam.png')" class="char-card bg-slate-900/60 border-2 border-slate-700 hover:border-cyan-400 rounded-xl p-4 flex flex-col items-center cursor-pointer transition transform hover:-translate-y-1">
-                    <img src="img/char_sam.png" class="w-36 h-36 object-contain rounded-lg mb-3 bg-slate-800/50">
-                    <h3 class="font-bold text-slate-100">Sam</h3>
-                    <p class="text-xs text-slate-400 text-center mt-1">โค้ชผู้เชี่ยวชาญจริยธรรมและข้อมูลนักกีฬา</p>
+                <div onclick="selectCharacter('Sam', 'img/char_sam.png')" class="char-card bg-slate-900/60 border-2 border-slate-700 active:border-cyan-400 hover:border-cyan-400 rounded-xl p-3 sm:p-4 flex flex-row md:flex-col items-center cursor-pointer transition">
+                    <img src="img/char_sam.png" class="w-16 h-16 sm:w-36 sm:h-36 object-contain rounded-lg mr-3 md:mr-0 md:mb-3 bg-slate-800/50 flex-shrink-0">
+                    <div class="text-left md:text-center">
+                        <h3 class="font-bold text-slate-100 text-sm sm:text-base">Sam</h3>
+                        <p class="text-[11px] sm:text-xs text-slate-400 mt-0.5 sm:mt-1">โค้ชผู้เชี่ยวชาญจริยธรรมและข้อมูลนักกีฬา</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="w-full max-w-sm flex flex-col space-y-4">
-                <input type="text" id="playerNameInput" placeholder="ป้อนชื่อผู้เล่นของคุณ..." class="w-full bg-slate-900 border border-slate-600 rounded-lg px-4 py-2 text-center text-slate-100 focus:outline-none focus:border-cyan-400">
-                <button onclick="startGame()" class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold py-3 rounded-lg shadow-lg transition">
+            <div class="w-full max-w-sm flex flex-col space-y-3 sm:space-y-4">
+                <input type="text" id="playerNameInput" placeholder="ป้อนชื่อผู้เล่นของคุณ..." class="w-full bg-slate-900 border border-slate-600 rounded-lg px-4 py-2.5 text-center text-slate-100 text-sm focus:outline-none focus:border-cyan-400">
+                <button onclick="startGame()" class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 active:scale-95 text-white font-bold py-3 rounded-lg shadow-lg transition text-sm sm:text-base">
                     เข้าสู่แผนที่การเดินทาง <i class="fa-solid fa-play ml-2"></i>
                 </button>
             </div>
         </div>
 
         <!-- SCREEN 2: 2D World Map View -->
-        <div id="mapScreen" class="hidden relative w-full h-full max-w-5xl bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 shadow-2xl flex justify-center items-center">
-            <!-- Background World Map Image -->
-            <img src="img/map_background.jpg" alt="World Map" class="absolute inset-0 w-full h-full object-cover opacity-90">
+        <div id="mapScreen" class="hidden relative w-full h-[75vh] sm:h-full max-w-5xl bg-slate-800 rounded-2xl overflow-x-auto overflow-y-hidden border border-slate-700 shadow-2xl flex items-center custom-scrollbar">
+            
+            <!-- Map Inner Container (Fixed aspect for horizontal mobile scroll) -->
+            <div class="relative min-w-[700px] md:min-w-full w-full h-full flex justify-between items-center">
+                
+                <!-- Background World Map Image -->
+                <img src="img/map_background.jpg" alt="World Map" class="absolute inset-0 w-full h-full object-cover opacity-90">
 
-            <!-- SVG Overlay for Dynamic Connection Paths -->
-            <svg class="absolute inset-0 w-full h-full z-0 pointer-events-none" id="pathSvg">
-                <!-- Path 1-2 -->
-                <line id="path1" x1="10%" y1="70%" x2="25%" y2="35%" stroke="#64748b" stroke-width="6" stroke-linecap="round" class="path-line" />
-                <!-- Path 2-3 -->
-                <line id="path2" x1="25%" y1="35%" x2="45%" y2="60%" stroke="#64748b" stroke-width="6" stroke-linecap="round" class="path-line" />
-                <!-- Path 3-4 -->
-                <line id="path3" x1="45%" y1="60%" x2="60%" y2="25%" stroke="#64748b" stroke-width="6" stroke-linecap="round" class="path-line" />
-                <!-- Path 4-5 -->
-                <line id="path4" x1="60%" y1="25%" x2="78%" y2="65%" stroke="#64748b" stroke-width="6" stroke-linecap="round" class="path-line" />
-                <!-- Path 5-6 -->
-                <line id="path5" x1="78%" y1="65%" x2="90%" y2="35%" stroke="#64748b" stroke-width="6" stroke-linecap="round" class="path-line" />
-            </svg>
+                <!-- SVG Overlay for Dynamic Connection Paths -->
+                <svg class="absolute inset-0 w-full h-full z-0 pointer-events-none" id="pathSvg">
+                    <line id="path1" x1="10%" y1="70%" x2="25%" y2="35%" stroke="#64748b" stroke-width="5" stroke-linecap="round" class="path-line" />
+                    <line id="path2" x1="25%" y1="35%" x2="45%" y2="60%" stroke="#64748b" stroke-width="5" stroke-linecap="round" class="path-line" />
+                    <line id="path3" x1="45%" y1="60%" x2="60%" y2="25%" stroke="#64748b" stroke-width="5" stroke-linecap="round" class="path-line" />
+                    <line id="path4" x1="60%" y1="25%" x2="78%" y2="65%" stroke="#64748b" stroke-width="5" stroke-linecap="round" class="path-line" />
+                    <line id="path5" x1="78%" y1="65%" x2="90%" y2="35%" stroke="#64748b" stroke-width="5" stroke-linecap="round" class="path-line" />
+                </svg>
 
-            <!-- Player Sprite Avatar on Map -->
-            <div id="mapPlayerAvatar" class="absolute z-20 transition-all duration-700 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none" style="left: 10%; top: 70%;">
-                <img id="playerSpriteImg" src="img/char_alex.png" class="w-12 h-12 object-contain drop-shadow-[0_10px_10px_rgba(0,0,0,0.8)] animate-bounce">
-            </div>
-
-            <!-- Node Points Overlay -->
-            <div class="relative w-full h-full max-w-4xl max-h-[600px] flex justify-between items-center px-12 z-10">
-                <!-- Stage 1 Node -->
-                <div id="node1" onclick="openStageModal(1)" class="absolute left-[10%] top-[70%] transform -translate-x-1/2 -translate-y-1/2 cursor-pointer flex flex-col items-center group">
-                    <div class="node-ring w-16 h-16 rounded-full bg-slate-900/90 border-4 border-amber-400 flex items-center justify-center shadow-xl group-hover:scale-110 transition">
-                        <img src="img/stage1_ip.jpg" class="w-10 h-10 object-contain rounded-full">
-                    </div>
-                    <span class="bg-slate-900/90 text-amber-300 text-xs px-2 py-1 rounded mt-1 font-bold border border-slate-700">ด่าน 1: IP กีฬา</span>
+                <!-- Player Sprite Avatar on Map -->
+                <div id="mapPlayerAvatar" class="absolute z-20 transition-all duration-700 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none" style="left: 10%; top: 70%;">
+                    <img id="playerSpriteImg" src="img/char_alex.png" class="w-10 h-10 sm:w-12 sm:h-12 object-contain drop-shadow-[0_10px_10px_rgba(0,0,0,0.8)] animate-bounce">
                 </div>
 
-                <!-- Stage 2 Node -->
-                <div id="node2" onclick="openStageModal(2)" class="absolute left-[25%] top-[35%] transform -translate-x-1/2 -translate-y-1/2 cursor-pointer flex flex-col items-center group opacity-50 pointer-events-none">
-                    <div class="node-ring w-16 h-16 rounded-full bg-slate-900/90 border-4 border-slate-500 flex items-center justify-center shadow-xl group-hover:scale-110 transition">
-                        <img src="img/stage2_copyright.jpg" class="w-10 h-10 object-contain rounded-full">
+                <!-- Node Points Overlay -->
+                <div class="relative w-full h-full flex justify-between items-center px-8 sm:px-12 z-10">
+                    <!-- Stage 1 Node -->
+                    <div id="node1" onclick="openStageModal(1)" class="absolute left-[10%] top-[70%] transform -translate-x-1/2 -translate-y-1/2 cursor-pointer flex flex-col items-center group">
+                        <div class="node-ring w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-slate-900/90 border-2 sm:border-4 border-amber-400 flex items-center justify-center shadow-xl transition">
+                            <img src="img/stage1_ip.jpg" class="w-8 h-8 sm:w-10 sm:h-10 object-contain rounded-full">
+                        </div>
+                        <span class="bg-slate-900/90 text-amber-300 text-[10px] sm:text-xs px-1.5 py-0.5 rounded mt-1 font-bold border border-slate-700 whitespace-nowrap">ด่าน 1: IP กีฬา</span>
                     </div>
-                    <span class="bg-slate-900/90 text-slate-400 text-xs px-2 py-1 rounded mt-1 font-bold border border-slate-700">ด่าน 2: ลิขสิทธิ์</span>
+
+                    <!-- Stage 2 Node -->
+                    <div id="node2" onclick="openStageModal(2)" class="absolute left-[25%] top-[35%] transform -translate-x-1/2 -translate-y-1/2 cursor-pointer flex flex-col items-center group opacity-50 pointer-events-none">
+                        <div class="node-ring w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-slate-900/90 border-2 sm:border-4 border-slate-500 flex items-center justify-center shadow-xl transition">
+                            <img src="img/stage2_copyright.jpg" class="w-8 h-8 sm:w-10 sm:h-10 object-contain rounded-full">
+                        </div>
+                        <span class="bg-slate-900/90 text-slate-400 text-[10px] sm:text-xs px-1.5 py-0.5 rounded mt-1 font-bold border border-slate-700 whitespace-nowrap">ด่าน 2: ลิขสิทธิ์</span>
+                    </div>
+
+                    <!-- Stage 3 Node -->
+                    <div id="node3" onclick="openStageModal(3)" class="absolute left-[45%] top-[60%] transform -translate-x-1/2 -translate-y-1/2 cursor-pointer flex flex-col items-center group opacity-50 pointer-events-none">
+                        <div class="node-ring w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-slate-900/90 border-2 sm:border-4 border-slate-500 flex items-center justify-center shadow-xl transition">
+                            <img src="img/stage3_patent.jpg" class="w-8 h-8 sm:w-10 sm:h-10 object-contain rounded-full">
+                        </div>
+                        <span class="bg-slate-900/90 text-slate-400 text-[10px] sm:text-xs px-1.5 py-0.5 rounded mt-1 font-bold border border-slate-700 whitespace-nowrap">ด่าน 3: สิทธิบัตร</span>
+                    </div>
+
+                    <!-- Stage 4 Node -->
+                    <div id="node4" onclick="openStageModal(4)" class="absolute left-[60%] top-[25%] transform -translate-x-1/2 -translate-y-1/2 cursor-pointer flex flex-col items-center group opacity-50 pointer-events-none">
+                        <div class="node-ring w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-slate-900/90 border-2 sm:border-4 border-slate-500 flex items-center justify-center shadow-xl transition">
+                            <img src="img/stage4_petty_patent.jpg" class="w-8 h-8 sm:w-10 sm:h-10 object-contain rounded-full">
+                        </div>
+                        <span class="bg-slate-900/90 text-slate-400 text-[10px] sm:text-xs px-1.5 py-0.5 rounded mt-1 font-bold border border-slate-700 whitespace-nowrap">ด่าน 4: อนุสิทธิบัตร</span>
+                    </div>
+
+                    <!-- Stage 5 Node -->
+                    <div id="node5" onclick="openStageModal(5)" class="absolute left-[78%] top-[65%] transform -translate-x-1/2 -translate-y-1/2 cursor-pointer flex flex-col items-center group opacity-50 pointer-events-none">
+                        <div class="node-ring w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-slate-900/90 border-2 sm:border-4 border-slate-500 flex items-center justify-center shadow-xl transition">
+                            <img src="img/stage5_trademark_secret.jpg" class="w-8 h-8 sm:w-10 sm:h-10 object-contain rounded-full">
+                        </div>
+                        <span class="bg-slate-900/90 text-slate-400 text-[10px] sm:text-xs px-1.5 py-0.5 rounded mt-1 font-bold border border-slate-700 whitespace-nowrap">ด่าน 5: แบรนด์/ความลับ</span>
+                    </div>
+
+                    <!-- Stage 6 Node -->
+                    <div id="node6" onclick="openStageModal(6)" class="absolute left-[90%] top-[35%] transform -translate-x-1/2 -translate-y-1/2 cursor-pointer flex flex-col items-center group opacity-50 pointer-events-none">
+                        <div class="node-ring w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-slate-900/90 border-2 sm:border-4 border-slate-500 flex items-center justify-center shadow-xl transition">
+                            <img src="img/stage6_ethics_pdpa.jpg" class="w-8 h-8 sm:w-10 sm:h-10 object-contain rounded-full">
+                        </div>
+                        <span class="bg-slate-900/90 text-slate-400 text-[10px] sm:text-xs px-1.5 py-0.5 rounded mt-1 font-bold border border-slate-700 whitespace-nowrap">ด่าน 6: จริยธรรม/PDPA</span>
+                    </div>
                 </div>
 
-                <!-- Stage 3 Node -->
-                <div id="node3" onclick="openStageModal(3)" class="absolute left-[45%] top-[60%] transform -translate-x-1/2 -translate-y-1/2 cursor-pointer flex flex-col items-center group opacity-50 pointer-events-none">
-                    <div class="node-ring w-16 h-16 rounded-full bg-slate-900/90 border-4 border-slate-500 flex items-center justify-center shadow-xl group-hover:scale-110 transition">
-                        <img src="img/stage3_patent.jpg" class="w-10 h-10 object-contain rounded-full">
-                    </div>
-                    <span class="bg-slate-900/90 text-slate-400 text-xs px-2 py-1 rounded mt-1 font-bold border border-slate-700">ด่าน 3: สิทธิบัตร</span>
-                </div>
-
-                <!-- Stage 4 Node -->
-                <div id="node4" onclick="openStageModal(4)" class="absolute left-[60%] top-[25%] transform -translate-x-1/2 -translate-y-1/2 cursor-pointer flex flex-col items-center group opacity-50 pointer-events-none">
-                    <div class="node-ring w-16 h-16 rounded-full bg-slate-900/90 border-4 border-slate-500 flex items-center justify-center shadow-xl group-hover:scale-110 transition">
-                        <img src="img/stage4_petty_patent.jpg" class="w-10 h-10 object-contain rounded-full">
-                    </div>
-                    <span class="bg-slate-900/90 text-slate-400 text-xs px-2 py-1 rounded mt-1 font-bold border border-slate-700">ด่าน 4: อนุสิทธิบัตร</span>
-                </div>
-
-                <!-- Stage 5 Node -->
-                <div id="node5" onclick="openStageModal(5)" class="absolute left-[78%] top-[65%] transform -translate-x-1/2 -translate-y-1/2 cursor-pointer flex flex-col items-center group opacity-50 pointer-events-none">
-                    <div class="node-ring w-16 h-16 rounded-full bg-slate-900/90 border-4 border-slate-500 flex items-center justify-center shadow-xl group-hover:scale-110 transition">
-                        <img src="img/stage5_trademark_secret.jpg" class="w-10 h-10 object-contain rounded-full">
-                    </div>
-                    <span class="bg-slate-900/90 text-slate-400 text-xs px-2 py-1 rounded mt-1 font-bold border border-slate-700">ด่าน 5: แบรนด์/ความลับ</span>
-                </div>
-
-                <!-- Stage 6 Node -->
-                <div id="node6" onclick="openStageModal(6)" class="absolute left-[90%] top-[35%] transform -translate-x-1/2 -translate-y-1/2 cursor-pointer flex flex-col items-center group opacity-50 pointer-events-none">
-                    <div class="node-ring w-16 h-16 rounded-full bg-slate-900/90 border-4 border-slate-500 flex items-center justify-center shadow-xl group-hover:scale-110 transition">
-                        <img src="img/stage6_ethics_pdpa.jpg" class="w-10 h-10 object-contain rounded-full">
-                    </div>
-                    <span class="bg-slate-900/90 text-slate-400 text-xs px-2 py-1 rounded mt-1 font-bold border border-slate-700">ด่าน 6: จริยธรรม/PDPA</span>
-                </div>
             </div>
         </div>
 
         <!-- SCREEN 3: Quest & Micro-learning Modal -->
-        <div id="questModal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-30">
-            <div class="bg-slate-800 border border-slate-700 rounded-2xl max-w-2xl w-full p-6 shadow-2xl flex flex-col max-h-[90vh] custom-scrollbar overflow-y-auto">
-                <div class="flex justify-between items-center mb-4 border-b border-slate-700 pb-3">
-                    <h3 id="modalTitle" class="text-xl font-bold text-amber-400">ด่านการเรียนรู้</h3>
-                    <button onclick="closeQuestModal()" class="text-slate-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+        <div id="questModal" class="hidden fixed inset-0 bg-black/85 flex items-center justify-center p-3 sm:p-4 z-30">
+            <div class="bg-slate-800 border border-slate-700 rounded-2xl max-w-2xl w-full p-4 sm:p-6 shadow-2xl flex flex-col max-h-[92vh] custom-scrollbar overflow-y-auto">
+                <div class="flex justify-between items-center mb-3 border-b border-slate-700 pb-2.5">
+                    <h3 id="modalTitle" class="text-base sm:text-xl font-bold text-amber-400 leading-tight">ด่านการเรียนรู้</h3>
+                    <button onclick="closeQuestModal()" class="text-slate-400 hover:text-white p-1 text-base sm:text-lg"><i class="fa-solid fa-xmark"></i></button>
                 </div>
 
                 <!-- Learning Banner Image -->
-                <img id="modalBanner" src="img/banner_ip_intro.jpg" class="w-full h-48 object-cover rounded-xl mb-4 border border-slate-700">
+                <img id="modalBanner" src="img/banner_ip_intro.jpg" class="w-full h-36 sm:h-48 object-cover rounded-xl mb-3 sm:mb-4 border border-slate-700 flex-shrink-0">
 
                 <!-- Micro-learning Content -->
-                <div id="modalLearningText" class="text-sm text-slate-300 bg-slate-900/60 p-4 rounded-xl border border-slate-700 mb-4 leading-relaxed">
+                <div id="modalLearningText" class="text-xs sm:text-sm text-slate-300 bg-slate-900/70 p-3 sm:p-4 rounded-xl border border-slate-700 mb-3 sm:mb-4 leading-relaxed">
                     เนื้อหาเรียนรู้ย่อยสั้นๆ สำหรับด่านนี้...
                 </div>
 
                 <!-- Mini Quiz Section -->
-                <div id="quizContainer" class="space-y-4">
-                    <h4 class="font-bold text-cyan-400 text-sm"><i class="fa-solid fa-circle-question mr-2"></i>ภารกิจตอบคำถาม (1/3 ข้อ)</h4>
-                    <p id="quizQuestion" class="text-sm font-semibold text-slate-100">คำถามประเมินความเข้าใจ...</p>
+                <div id="quizContainer" class="space-y-3">
+                    <h4 class="font-bold text-cyan-400 text-xs sm:text-sm"><i class="fa-solid fa-circle-question mr-1.5"></i>ภารกิจตอบคำถาม</h4>
+                    <p id="quizQuestion" class="text-xs sm:text-sm font-semibold text-slate-100">คำถามประเมินความเข้าใจ...</p>
 
                     <div id="quizChoices" class="grid grid-cols-1 gap-2">
                         <!-- Choice Buttons generated by JS -->
@@ -208,36 +215,36 @@
         </div>
 
         <!-- SCREEN 4: Final Analytics & Evaluation Report Screen -->
-        <div id="reportScreen" class="hidden w-full max-w-3xl bg-slate-800 border border-slate-700 rounded-2xl p-6 shadow-2xl flex flex-col items-center">
-            <img src="img/icon_trophy.png" class="w-20 h-20 object-contain mb-2">
-            <h2 class="text-2xl font-bold text-amber-400 mb-1">รายงานสรุปผลการเรียนรู้</h2>
-            <p class="text-xs text-slate-400 mb-6">ภารกิจเสร็จสมบูรณ์ - บทที่ 8 ทรัพย์สินทางปัญญาและจริยธรรมของนวัตกรรมทางพลศึกษาและกีฬา</p>
+        <div id="reportScreen" class="hidden w-full max-w-3xl bg-slate-800 border border-slate-700 rounded-2xl p-4 sm:p-6 shadow-2xl flex flex-col items-center my-auto">
+            <img src="img/icon_trophy.png" class="w-16 h-16 sm:w-20 sm:h-20 object-contain mb-2">
+            <h2 class="text-xl sm:text-2xl font-bold text-amber-400 mb-1 text-center">รายงานสรุปผลการเรียนรู้</h2>
+            <p class="text-[11px] sm:text-xs text-slate-400 mb-4 sm:mb-6 text-center">ภารกิจเสร็จสมบูรณ์ - บทที่ 8 ทรัพย์สินทางปัญญาและจริยธรรมทางการกีฬา</p>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full mb-6">
-                <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700 text-center">
-                    <p class="text-xs text-slate-400">ผู้เล่น</p>
-                    <p id="rptName" class="font-bold text-cyan-400 text-base mt-1">-</p>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4 w-full mb-4 sm:mb-6">
+                <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-700 text-center">
+                    <p class="text-[10px] sm:text-xs text-slate-400">ผู้เล่น</p>
+                    <p id="rptName" class="font-bold text-cyan-400 text-sm sm:text-base mt-0.5 truncate">-</p>
                 </div>
-                <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700 text-center">
-                    <p class="text-xs text-slate-400">ดาวที่ได้รับ</p>
-                    <p id="rptStars" class="font-bold text-amber-400 text-base mt-1">0 / 18</p>
+                <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-700 text-center">
+                    <p class="text-[10px] sm:text-xs text-slate-400">ดาวที่ได้รับ</p>
+                    <p id="rptStars" class="font-bold text-amber-400 text-sm sm:text-base mt-0.5">0 / 18</p>
                 </div>
-                <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700 text-center">
-                    <p class="text-xs text-slate-400">คะแนนสะสม</p>
-                    <p id="rptScore" class="font-bold text-emerald-400 text-base mt-1">0 XP</p>
+                <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-700 text-center">
+                    <p class="text-[10px] sm:text-xs text-slate-400">คะแนนสะสม</p>
+                    <p id="rptScore" class="font-bold text-emerald-400 text-sm sm:text-base mt-0.5">0 XP</p>
                 </div>
-                <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700 text-center">
-                    <p class="text-xs text-slate-400">ผลการประเมิน</p>
-                    <p id="rptGrade" class="font-bold text-indigo-400 text-base mt-1">เกรด -</p>
+                <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-700 text-center">
+                    <p class="text-[10px] sm:text-xs text-slate-400">ผลการประเมิน</p>
+                    <p id="rptGrade" class="font-bold text-indigo-400 text-sm sm:text-base mt-0.5">เกรด -</p>
                 </div>
             </div>
 
-            <div class="w-full flex space-x-4">
-                <button onclick="window.print()" class="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 rounded-lg shadow transition">
-                    <i class="fa-solid fa-print mr-2"></i> พิมพ์รายงานผล
+            <div class="w-full flex flex-col sm:flex-row gap-2.5 sm:gap-4">
+                <button onclick="window.print()" class="w-full bg-slate-700 active:bg-slate-600 text-white font-bold py-2.5 sm:py-3 rounded-lg shadow transition text-xs sm:text-sm">
+                    <i class="fa-solid fa-print mr-1.5"></i> พิมพ์รายงานผล
                 </button>
-                <button onclick="location.reload()" class="flex-1 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold py-3 rounded-lg shadow transition">
-                    <i class="fa-solid fa-rotate-right mr-2"></i> เล่นใหม่อีกครั้ง
+                <button onclick="location.reload()" class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 active:scale-95 text-white font-bold py-2.5 sm:py-3 rounded-lg shadow transition text-xs sm:text-sm">
+                    <i class="fa-solid fa-rotate-right mr-1.5"></i> เล่นใหม่อีกครั้ง
                 </button>
             </div>
         </div>
@@ -245,7 +252,7 @@
     </main>
 
     <!-- Footer Status Bar -->
-    <footer class="bg-slate-800/80 border-t border-slate-700 py-2 px-6 text-center text-xs text-slate-400">
+    <footer class="bg-slate-800/80 border-t border-slate-700 py-1.5 sm:py-2 px-4 text-center text-[10px] sm:text-xs text-slate-400">
         2D Interactive Quest App - บทที่ 8 ทรัพย์สินทางปัญญาและจริยธรรมของนวัตกรรมทางพลศึกษาและกีฬา
     </footer>
 
@@ -353,9 +360,9 @@
             if (isAudioMuted) {
                 bgmMap.pause();
                 bgmVictory.pause();
-                btnIcon.className = 'fa-solid fa-volume-xmark text-base text-slate-400';
+                btnIcon.className = 'fa-solid fa-volume-xmark text-xs sm:text-base text-slate-400';
             } else {
-                btnIcon.className = 'fa-solid fa-volume-high text-base text-cyan-400';
+                btnIcon.className = 'fa-solid fa-volume-high text-xs sm:text-base text-cyan-400';
                 if (!document.getElementById('reportScreen').classList.contains('hidden')) {
                     bgmVictory.play().catch(()=>{});
                 } else if (!document.getElementById('mapScreen').classList.contains('hidden')) {
@@ -436,7 +443,7 @@
 
             qData.choices.forEach((choice, idx) => {
                 const btn = document.createElement('button');
-                btn.className = 'w-full text-left bg-slate-900/80 hover:bg-cyan-900/40 border border-slate-700 hover:border-cyan-500 rounded-lg p-3 text-xs text-slate-200 transition';
+                btn.className = 'w-full text-left bg-slate-900/80 active:bg-cyan-900/60 border border-slate-700 active:border-cyan-500 rounded-lg p-2.5 sm:p-3 text-xs text-slate-200 transition';
                 btn.innerText = choice;
                 btn.onclick = () => answerQuestion(idx);
                 choicesContainer.appendChild(btn);
@@ -460,7 +467,7 @@
             }
 
             // Update HUD Stats
-            document.getElementById('hudStars').innerText = `${player.stars} / 18`;
+            document.getElementById('hudStars').innerText = `${player.stars}/18`;
             document.getElementById('hudScore').innerText = `${player.score} XP`;
 
             closeQuestModal();
