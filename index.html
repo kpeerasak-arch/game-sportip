@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Sports IP & Ethics 2D Learning Quest</title>
-    <!-- Prevent 404 Favicon Error -->
-    <link rel="icon" href="data:,">
     <!-- Tailwind CSS for UI Layout -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -114,7 +112,7 @@
         <!-- SCREEN 2: 2D World Map View -->
         <div id="mapScreen" class="hidden relative w-full h-[75vh] sm:h-full max-w-5xl bg-slate-800 rounded-2xl overflow-x-auto overflow-y-hidden border border-slate-700 shadow-2xl flex items-center custom-scrollbar">
             
-            <!-- Map Inner Container -->
+            <!-- Map Inner Container (Fixed aspect for horizontal mobile scroll) -->
             <div class="relative min-w-[700px] md:min-w-full w-full h-full flex justify-between items-center">
                 
                 <!-- Background World Map Image -->
